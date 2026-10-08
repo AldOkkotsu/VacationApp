@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Source this file before running dotnet in the Linux cloud workspace.
+VACATIONAPP_REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+export VACATIONAPP_TOOLS_DIR="${VACATIONAPP_TOOLS_DIR:-$(dirname "$VACATIONAPP_REPO_ROOT")/.tools}"
+export DOTNET_ROOT="$VACATIONAPP_TOOLS_DIR/dotnet"
+export DOTNET_CLI_HOME="$VACATIONAPP_TOOLS_DIR/dotnet-home"
+export NUGET_PACKAGES="$VACATIONAPP_TOOLS_DIR/nuget"
+export XDG_DATA_HOME="$VACATIONAPP_TOOLS_DIR/xdg-data"
+export JAVA_HOME="$VACATIONAPP_TOOLS_DIR/jdk21"
+export ANDROID_HOME="$VACATIONAPP_TOOLS_DIR/android-sdk"
+export ANDROID_SDK_ROOT="$ANDROID_HOME"
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+export DOTNET_NOLOGO=1
+export DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
+export DOTNET_CLI_WORKLOAD_UPDATE_NOTIFY_DISABLE=true
+export PATH="$DOTNET_ROOT:$JAVA_HOME/bin:$ANDROID_HOME/platform-tools:$PATH"
