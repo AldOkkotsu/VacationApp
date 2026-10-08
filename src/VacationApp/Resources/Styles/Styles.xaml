@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Style TargetType="ContentPage">
+        <Setter Property="BackgroundColor" Value="{StaticResource PageBackground}" />
+    </Style>
+    <Style TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource TextPrimary}" />
+        <Setter Property="FontSize" Value="15" />
+    </Style>
+    <Style x:Key="Caption" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource TextSecondary}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="LineHeight" Value="1.2" />
+    </Style>
+    <Style x:Key="SectionTitle" TargetType="Label">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+    <Style x:Key="Card" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{StaticResource CardBackground}" />
+        <Setter Property="Stroke" Value="{StaticResource LineColor}" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="Padding" Value="20" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 20" />
+    </Style>
+    <Style x:Key="PrimaryButton" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="MinimumHeightRequest" Value="48" />
+        <Setter Property="Padding" Value="16,10" />
+    </Style>
+    <Style TargetType="Button" BasedOn="{StaticResource PrimaryButton}" />
+    <Style x:Key="SecondaryButton" TargetType="Button" BasedOn="{StaticResource PrimaryButton}">
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimarySoft}" />
+        <Setter Property="TextColor" Value="{StaticResource Primary}" />
+    </Style>
+    <Style TargetType="Entry">
+        <Setter Property="TextColor" Value="{StaticResource TextPrimary}" />
+        <Setter Property="PlaceholderColor" Value="{StaticResource TextSecondary}" />
+        <Setter Property="MinimumHeightRequest" Value="48" />
+        <Setter Property="FontSize" Value="16" />
+    </Style>
+    <Style TargetType="Editor">
+        <Setter Property="TextColor" Value="{StaticResource TextPrimary}" />
+        <Setter Property="PlaceholderColor" Value="{StaticResource TextSecondary}" />
+        <Setter Property="FontSize" Value="16" />
+    </Style>
+    <Style TargetType="Picker">
+        <Setter Property="TextColor" Value="{StaticResource TextPrimary}" />
+        <Setter Property="MinimumHeightRequest" Value="48" />
+        <Setter Property="FontSize" Value="16" />
+    </Style>
+    <Style TargetType="DatePicker">
+        <Setter Property="TextColor" Value="{StaticResource TextPrimary}" />
+        <Setter Property="Format" Value="dd MMM yyyy" />
+        <Setter Property="MinimumHeightRequest" Value="48" />
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/VacationApp.Core/VacationApp.Core.csproj" />
+    <Project Path="src/VacationApp/VacationApp.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/VacationApp.Core.Tests/VacationApp.Core.Tests.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:VacationApp.ViewModels"
+             x:Class="VacationApp.Pages.DashboardPage"
+             x:DataType="vm:DashboardViewModel"
+             Title="Vacation · Vacaciones"
+             NavigationPage.HasNavigationBar="False">
+    <ScrollView>
+        <VerticalStackLayout Padding="20,24" Spacing="22" MaximumWidthRequest="900" HorizontalOptions="Fill">
+            <Border BackgroundColor="{StaticResource Navy}" StrokeThickness="0"
+                    StrokeShape="RoundRectangle 24" Padding="24">
+                <VerticalStackLayout Spacing="18">
+                    <FlexLayout Direction="Row" Wrap="Wrap" JustifyContent="SpaceBetween" AlignItems="Center">
+                        <VerticalStackLayout Spacing="5" Margin="0,0,16,10">
+                            <Label Text="VACATION" TextColor="#83DDD1" FontAttributes="Bold" FontSize="13" CharacterSpacing="3" />
+                            <Label Text="{Binding Name}" TextColor="White" FontSize="20" FontAttributes="Bold" />
+                            <Label Text="{Binding Role}" TextColor="#CDDCE9" FontSize="14" />
+                        </VerticalStackLayout>
+                        <Button Text="Cerrar sesión" Clicked="OnLogoutClicked" BackgroundColor="#263E56"
+                                TextColor="White" IsEnabled="{Binding IsNotBusy}" Margin="0,0,0,10" />
+                    </FlexLayout>
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="{Binding Greeting}" TextColor="White" FontSize="27" FontAttributes="Bold" />
+                        <Label Text="{Binding RoleDescription}" TextColor="#CDDCE9" FontSize="15" LineHeight="1.2" />
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border BackgroundColor="{StaticResource PrimarySoft}" StrokeThickness="0"
+                    StrokeShape="RoundRectangle 12" Padding="14,12">
+                <Label Text="Modo demo · Tus cambios se guardan en este dispositivo. Utiliza datos ficticios."
+                       TextColor="#176967" FontSize="13" />
+            </Border>
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="{StaticResource Primary}" />
+            <Border IsVisible="{Binding HasFeedback}" StrokeThickness="0" BackgroundColor="#E5F4ED"
+                    StrokeShape="RoundRectangle 12" Padding="16">
+                <Label Text="{Binding Feedback}" TextColor="#216846" />
+            </Border>
+
+            <VerticalStackLayout Spacing="22" IsEnabled="{Binding IsNotBusy}">
+                <Border Style="{StaticResource Card}" IsVisible="{Binding IsEmployee}">
+                    <VerticalStackLayout Spacing="18">
+                        <Label Text="{Binding BalanceYear}" Style="{StaticResource SectionTitle}" />
+                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                            <VerticalStackLayout Grid.Column="0" Spacing="6">
+                                <Label Text="{Binding AvailableDays}" FontSize="35" FontAttributes="Bold" TextColor="{StaticResource Primary}" />
+                                <Label Text="Disponibles" Style="{StaticResource Caption}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="1" Spacing="6">
+                                <Label Text="{Binding UsedDays}" FontSize="35" FontAttributes="Bold" />
+                                <Label Text="Aprobados" Style="{StaticResource Caption}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="2" Spacing="6">
+                                <Label Text="{Binding ReservedDays}" FontSize="35" FontAttributes="Bold" />
+                                <Label Text="Reservados" Style="{StaticResource Caption}" />
+                            </VerticalStackLayout>
+                        </Grid>
+                        <Label Text="{Binding TotalDays, StringFormat='Tienes {0} días hábiles asignados este año.'}" Style="{StaticResource Caption}" />
+                        <Label Text="Los días pendientes de aprobación se reservan. Si una solicitud se rechaza, vuelven a estar disponibles."
+                               Style="{StaticResource Caption}" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Style="{StaticResource Card}" IsVisible="{Binding IsReviewer}">
+                    <VerticalStackLayout Spacing="18">
+                        <Label Text="Un vistazo a las solicitudes" Style="{StaticResource SectionTitle}" />
+                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                            <VerticalStackLayout Grid.Column="0" Spacing="6">
+                                <Label Text="{Binding PendingCount}" FontSize="35" FontAttributes="Bold" TextColor="{StaticResource Primary}" />
+                                <Label Text="Por atender" Style="{StaticResource Caption}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="1" Spacing="6">
+                                <Label Text="{Binding ApprovedCount}" FontSize="35" FontAttributes="Bold" />
+                                <Label Text="Aprobadas" Style="{StaticResource Caption}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="2" Spacing="6">
+                                <Label Text="{Binding RejectedCount}" FontSize="35" FontAttributes="Bold" />
+                                <Label Text="Rechazadas" Style="{StaticResource Caption}" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Style="{StaticResource Card}" IsVisible="{Binding IsEmployee}">
+                    <VerticalStackLayout Spacing="18">
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="Solicitar vacaciones" Style="{StaticResource SectionTitle}" />
+                            <Label Text="Elige las fechas y comparte el motivo de tu solicitud." Style="{StaticResource Caption}" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Spacing="12">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="Primer día" FontAttributes="Bold" FontSize="14" />
+                                <DatePicker Date="{Binding StartDate}" MinimumDate="{Binding MinimumDate}"
+                                            SemanticProperties.Description="Primer día de vacaciones" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="Último día" FontAttributes="Bold" FontSize="14" />
+                                <DatePicker Date="{Binding EndDate}" MinimumDate="{Binding MinimumDate}"
+                                            SemanticProperties.Description="Último día de vacaciones, incluido" />
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Motivo" FontAttributes="Bold" FontSize="14" />
+                            <Editor Text="{Binding Reason}" Placeholder="Por ejemplo: descanso y viaje familiar"
+                                    AutoSize="TextChanges" MinimumHeightRequest="100" MaxLength="500"
+                                    SemanticProperties.Description="Motivo de la solicitud de vacaciones" />
+                        </VerticalStackLayout>
+                        <Label Text="Se incluyen ambas fechas y se cuentan días de lunes a viernes. Este demo no contempla feriados; los periodos que cruzan años descuentan días de cada año."
+                               Style="{StaticResource Caption}" />
+                        <Button Text="Enviar solicitud" Clicked="OnSubmitClicked" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <VerticalStackLayout Spacing="14">
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="{Binding ListTitle}" Style="{StaticResource SectionTitle}" />
+                            <Label Text="{Binding RequestCount}" Style="{StaticResource Caption}" />
+                        </VerticalStackLayout>
+                        <Button Grid.Column="1" Text="Actualizar" Style="{StaticResource SecondaryButton}" Clicked="OnRefreshClicked" />
+                    </Grid>
+                    <Label Text="{Binding ListDescription}" Style="{StaticResource Caption}" />
+
+                    <Border Style="{StaticResource Card}" IsVisible="{Binding IsEmpty}">
+                        <VerticalStackLayout Padding="4,12" Spacing="10">
+                            <Label Text="{Binding EmptyTitle}" FontAttributes="Bold" FontSize="18" HorizontalTextAlignment="Center" />
+                            <Label Text="{Binding EmptyDescription}" Style="{StaticResource Caption}" HorizontalTextAlignment="Center" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding Requests}" Spacing="14">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="vm:RequestCardViewModel">
+                                <Border Style="{StaticResource Card}">
+                                    <VerticalStackLayout Spacing="14">
+                                        <FlexLayout Direction="Row" Wrap="Wrap" JustifyContent="SpaceBetween" AlignItems="Center">
+                                            <Label Text="{Binding EmployeeName}" FontSize="18" FontAttributes="Bold" Margin="0,0,12,8" />
+                                            <Border BackgroundColor="{Binding StatusBackground}" StrokeThickness="0"
+                                                    StrokeShape="RoundRectangle 10" Padding="10,6" Margin="0,0,0,8">
+                                                <Label Text="{Binding Status}" TextColor="{Binding StatusForeground}" FontSize="12" FontAttributes="Bold" />
+                                            </Border>
+                                        </FlexLayout>
+                                        <VerticalStackLayout Spacing="5">
+                                            <Label Text="{Binding Dates}" FontAttributes="Bold" FontSize="16" />
+                                            <Label Text="{Binding Days}" TextColor="{StaticResource Primary}" FontAttributes="Bold" FontSize="14" />
+                                            <Label Text="{Binding Submitted}" Style="{StaticResource Caption}" />
+                                        </VerticalStackLayout>
+                                        <VerticalStackLayout Spacing="5">
+                                            <Label Text="Motivo" Style="{StaticResource Caption}" />
+                                            <Label Text="{Binding Reason}" LineHeight="1.2" />
+                                        </VerticalStackLayout>
+                                        <Border IsVisible="{Binding HasComment}" BackgroundColor="{StaticResource PageBackground}"
+                                                StrokeThickness="0" StrokeShape="RoundRectangle 10" Padding="12">
+                                            <VerticalStackLayout Spacing="5">
+                                                <Label Text="Último comentario" Style="{StaticResource Caption}" />
+                                                <Label Text="{Binding LatestComment}" FontSize="14" />
+                                            </VerticalStackLayout>
+                                        </Border>
+                                        <FlexLayout Direction="Row" Wrap="Wrap" AlignItems="Center">
+                                            <Button Text="Ver seguimiento" Style="{StaticResource SecondaryButton}" Clicked="OnHistoryClicked" Margin="0,0,8,6" />
+                                            <Button Text="{Binding ApprovalLabel}" IsVisible="{Binding CanApprove}" Clicked="OnApproveClicked" Margin="0,0,8,6" />
+                                            <Button Text="Rechazar" IsVisible="{Binding CanReject}" Clicked="OnRejectClicked"
+                                                    BackgroundColor="#FCECEC" TextColor="{StaticResource Danger}" Margin="0,0,8,6" />
+                                            <Button Text="Registrar en nómina" IsVisible="{Binding CanRegisterPayroll}"
+                                                    Clicked="OnRegisterPayrollClicked" Margin="0,0,8,6" />
+                                        </FlexLayout>
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+            <Label Text="Solicitud → Líder → Recursos Humanos → Nómina" HorizontalTextAlignment="Center"
+                   FontSize="12" TextColor="{StaticResource TextSecondary}" Margin="0,4,0,8" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

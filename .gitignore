@@ -1,0 +1,14 @@
+bin/
+obj/
+TestResults/
+artifacts/
+.vs/
+.idea/
+*.user
+*.suo
+*.keystore
+*.jks
+*.p12
+*.mobileprovision
+.DS_Store
+local.settings.json
